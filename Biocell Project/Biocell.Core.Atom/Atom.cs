@@ -4,24 +4,21 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Biocell.Core.Atom
+namespace Biocell.Core.Science
 {
-    public abstract class Atom : IBindable
+    public class Atom : IBindable
     {
-        public readonly string name, shortcutName;
+        public readonly ElementType type;
+        //public short electrons, protons;
 
-        protected Atom(string name, string shortcutName)
+        internal Atom(ElementType type)
         {
-            this.name = name;
-            this.shortcutName = shortcutName;
+            this.type = type;
         }
 
         public Molecule InitiateBind(Atom to)
         {
-            var molecule = new Molecule();
-            if (molecule.Bind(this) && molecule.Bind(to))
-                return molecule;
-            else return null;
+            return new Molecule().BindChain(this, to);
         }
 
         public virtual bool IsBindable(IBindable to)
@@ -39,7 +36,32 @@ namespace Biocell.Core.Atom
 
         public override string ToString()
         {
-            return shortcutName;
+            return type.ToString();
+        }
+
+        public IBindable Generate()
+        {
+            return new Atom(type);
+        }
+
+        public static Molecule operator *(Atom atom, int multiplicator)
+        {
+            var molecule = new Molecule();
+            molecule.Bind(atom);
+
+            if (multiplicator > 0)
+            {
+                for (int i = 0; i < multiplicator - 1; i++)
+                {
+                    molecule.Bind(atom.Generate());
+                }
+            }
+
+            return molecule;
+        }
+        public static implicit operator Molecule(Atom atom)
+        {
+            return new Molecule().Bind(atom);
         }
     }
 }

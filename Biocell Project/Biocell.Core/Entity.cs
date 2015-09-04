@@ -12,6 +12,8 @@ namespace Biocell.Core
     {
         public readonly Transform transform;
         public readonly Renderer renderer;
+
+        public bool update;
         // TODO: Implement ID
 
         public Entity()

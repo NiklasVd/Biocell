@@ -11,6 +11,8 @@ namespace Biocell.Game
 {
     public sealed class GameScene
     {
+        private const int entityCountForSort = 100;
+
         public readonly string name;
         internal List<Entity> entities;
 
@@ -25,11 +27,18 @@ namespace Biocell.Game
             if (!entities.Contains(entity))
             {
                 entities.Add(entity);
+                if (entities.Count % entityCountForSort == 0)
+                    SortEntities();
             }
         }
         public void RemoveEntity(Entity entity)
         {
             entities.Remove(entity);
+        }
+
+        private void SortEntities()
+        {
+            entities.OrderBy(e => e.update);
         }
     }
 }

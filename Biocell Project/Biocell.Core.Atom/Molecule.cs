@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Biocell.Core.Atom
+namespace Biocell.Core.Science
 {
-    public class Molecule : IBinder, IBindable
+    public class Molecule : IBinder<Molecule>, IBindable
     {
         private readonly List<IBindable> bounds;
 
@@ -16,26 +16,43 @@ namespace Biocell.Core.Atom
             bounds = new List<IBindable>();
         }
 
-        public bool Bind(IBindable to)
+        public Molecule Bind(IBindable to)
         {
             if (IsBindable(to) && to.IsBindable(this) &&
                 !bounds.Contains(to))
             {
                 bounds.Add(to);
-                return true;
             }
 
-            return false;
+            return this;
         }
-        public bool Release(IBindable atom)
+        public Molecule BindChain(params IBindable[] toChain)
         {
-            if (bounds.Remove(atom))
+            for (int i = 0; i < toChain.Length; i++)
             {
-                atom.LetRelease(this);
-                return true;
+                Bind(toChain[i]);
             }
 
-            return false;
+            return this;
+        }
+        public Molecule BindRange(IBindable[] toRange)
+        {
+            for (int i = 0; i < toRange.Length; i++)
+            {
+                Bind(toRange[i]);
+            }
+
+            return this;
+        }
+
+        public Molecule Release(IBindable of)
+        {
+            if (bounds.Remove(of))
+            {
+                of.LetRelease(this);
+            }
+
+            return this;
         }
 
         public virtual bool IsBindable(IBindable to)
@@ -77,12 +94,17 @@ namespace Biocell.Core.Atom
             {
                 var bound = t.b as Atom;
                 if (bound != null)
-                    stringBuilder.Append("+" + (t.count > 1 ? t.count : "") + bound.shortcutName);
+                    stringBuilder.Append("+" + (t.count > 1 ? t.count : "") + bound.ToString());
                 else
                     stringBuilder.Append(bound.ToString());
             });
 
             return stringBuilder.ToString();
+        }
+
+        public IBindable Generate()
+        {
+            return new Molecule().BindRange(bounds.ConvertAll((b) => b.Generate()).ToArray());
         }
     }
 }

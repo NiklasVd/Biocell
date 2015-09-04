@@ -5,7 +5,7 @@ VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Biocell.Core", "Biocell.Core\Biocell.Core.csproj", "{FAED9BD9-5523-431D-B80C-5EFA0E32687C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Biocell.Core.Atom", "Biocell.Core.Atom\Biocell.Core.Atom.csproj", "{49C7B1C2-EC3A-4B8A-BE5B-B2E39EB97721}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Biocell.Core.Science", "Biocell.Core.Atom\Biocell.Core.Science.csproj", "{49C7B1C2-EC3A-4B8A-BE5B-B2E39EB97721}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Biocell.Game", "Biocell.Game\Biocell.Game.csproj", "{7F499776-2BAD-41EB-B13C-F31073615ED0}"
 EndProject

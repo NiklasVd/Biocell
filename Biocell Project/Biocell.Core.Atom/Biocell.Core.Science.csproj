@@ -7,8 +7,8 @@
     <ProjectGuid>{49C7B1C2-EC3A-4B8A-BE5B-B2E39EB97721}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Biocell.Core.Atom</RootNamespace>
-    <AssemblyName>Biocell.Core.Atom</AssemblyName>
+    <RootNamespace>Biocell.Core.Science</RootNamespace>
+    <AssemblyName>Biocell.Core.Science</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -52,6 +52,7 @@
     <Compile Include="IBindable.cs" />
     <Compile Include="IBinder.cs" />
     <Compile Include="Molecule.cs" />
+    <Compile Include="PeriodicTable.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

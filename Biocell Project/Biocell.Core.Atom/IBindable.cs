@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Biocell.Core.Atom
+namespace Biocell.Core.Science
 {
     public interface IBindable
     {
@@ -12,5 +12,6 @@ namespace Biocell.Core.Atom
         void LetRelease(IBindable of);
 
         bool IsBindable(IBindable to);
+        IBindable Generate();
     }
 }

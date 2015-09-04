@@ -4,11 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Biocell.Core.Atom
+namespace Biocell.Core.Science
 {
-    public interface IBinder
+    public interface IBinder<T>
     {
-        bool Bind(IBindable to);
-        bool Release(IBindable of);
+        T Bind(IBindable to);
+        T BindChain(params IBindable[] toChain);
+        T BindRange(IBindable[] toRange);
+
+        T Release(IBindable of);
     }
 }

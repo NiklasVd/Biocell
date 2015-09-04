@@ -1,4 +1,6 @@
-﻿using Biocell.Game;
+﻿using Biocell.Core;
+using Biocell.Core.Science;
+using Biocell.Game;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
@@ -25,13 +27,17 @@ namespace BiocellApp
         protected override void Initialize()
         {
             gameCore = new GameCore();
+
+            var testCell = new EukaryoteCell();
+            gameCore.Scene.AddEntity(testCell);
+
             base.Initialize();
         }
 
         protected override void LoadContent()
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            gameCore.LoadContent(Content, @"Content\Content Resource Keys.txt");
+            gameCore.LoadContent(Content, Properties.Resources.ContentResourceFilePath);
 
             base.LoadContent();
         }

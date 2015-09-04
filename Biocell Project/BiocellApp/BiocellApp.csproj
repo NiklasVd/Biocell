@@ -64,6 +64,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -81,7 +82,7 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <ProjectReference Include="..\Biocell.Core.Atom\Biocell.Core.Science.csproj">
+    <ProjectReference Include="..\Biocell.Core.Science\Biocell.Core.Science.csproj">
       <Project>{49c7b1c2-ec3a-4b8a-be5b-b2e39eb97721}</Project>
       <Name>Biocell.Core.Science</Name>
     </ProjectReference>
@@ -95,8 +96,10 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\Content Resource Keys.txt" />
-    <Content Include="Content\Textures\GCC Logo.png" />
+    <Resource Include="Content\Content Resources.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Content Include="Content\Textures\Cell1.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

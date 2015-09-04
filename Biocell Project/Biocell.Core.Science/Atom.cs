@@ -18,7 +18,7 @@ namespace Biocell.Core.Science
 
         public Molecule InitiateBind(Atom to)
         {
-            return new Molecule().BindChain(this, to);
+            return new Molecule().Bind(this, to);
         }
 
         public virtual bool IsBindable(IBindable to)
@@ -59,6 +59,11 @@ namespace Biocell.Core.Science
 
             return molecule;
         }
+        public static Molecule operator +(Atom atom, IBindable b)
+        {
+            return new Molecule().Bind(atom, b);
+        }
+
         public static implicit operator Molecule(Atom atom)
         {
             return new Molecule().Bind(atom);

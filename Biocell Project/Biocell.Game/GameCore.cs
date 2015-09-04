@@ -14,11 +14,12 @@ namespace Biocell.Game
 {
     public class GameCore
     {
-        public const string sceneSavePath = @"Scenes\", sceneFileExtension = ".bcscene";
+        public const string sceneSavePath = @"Scenes\", sceneFileExtension = ".bcscene",
+            resourceComment = "#";
         public static string Version { get { return "1.00"; } }
 
-        private TextureController textureController;
-        public TextureController TextureController { get { return textureController; } }
+        private TextureController textures;
+        public TextureController Textures { get { return textures; } }
 
         private GameScene scene;
         public GameScene Scene { get { return scene; } }
@@ -43,12 +44,24 @@ namespace Biocell.Game
 
         public void LoadContent(ContentManager contentManager, string resourceFilePath)
         {
-            textureController = new TextureController(contentManager);
-            textureController.RegisterTexturesByResourceFile(resourceFilePath);
+            if (File.Exists(resourceFilePath))
+            {
+                var textLines = File.ReadAllLines(resourceFilePath).ToList();
+                textLines.ForEach(t => t.Trim());
+                textLines.RemoveAll(t => t.StartsWith(resourceComment));
+
+                #region Textures
+                var textureTextLines = textLines.FindAll(t => t.StartsWith(TextureController.textureResourceHeader)); // Cut the found items out of the textLines list?
+
+                textures = new TextureController(contentManager);
+                textures.RegisterTexturesByResourceCode(textureTextLines.ToArray());
+                #endregion
+            }
         }
         public void UnloadContent()
         {
-            textureController.UnregisterAll();
+            if (textures != null)
+                textures.UnregisterAll();
         }
         public void Update(GameTime gameTime)
         {
@@ -69,8 +82,8 @@ namespace Biocell.Game
 
         private void UnloadResources()
         {
-            if (textureController != null)
-                textureController.UnregisterAll();
+            if (textures != null)
+                textures.UnregisterAll();
         }
 
         public static void Save(GameScene scene)

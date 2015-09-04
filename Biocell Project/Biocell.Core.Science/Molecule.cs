@@ -26,7 +26,7 @@ namespace Biocell.Core.Science
 
             return this;
         }
-        public Molecule BindChain(params IBindable[] toChain)
+        public Molecule Bind(params IBindable[] toChain)
         {
             for (int i = 0; i < toChain.Length; i++)
             {
@@ -105,6 +105,15 @@ namespace Biocell.Core.Science
         public IBindable Generate()
         {
             return new Molecule().BindRange(bounds.ConvertAll((b) => b.Generate()).ToArray());
+        }
+
+        public static Molecule operator +(Molecule a, IBindable b)
+        {
+            return a.Bind(b);
+        }
+        public static Molecule operator -(Molecule a, IBindable b)
+        {
+            return a.Release(b);
         }
     }
 }

@@ -9,15 +9,14 @@ namespace BiocellApp
 {
     static class Program
     {
-        public const string version = "1.00-a",
-            debugLogSaveFilePath = @"debug.log";
+        public const string debugLogSaveFilePath = @"debug.log";
 
         static void Main()
         {
             using (var biocellGame = new BiocellGame())
             {
                 Debug.Log("Biocell Game");
-                Debug.Log("Version " + version + "\n");
+                Debug.Log("Version " + Properties.Resources.Version + "\n");
 
                 biocellGame.Exiting += OnBiocellGameExit;
                 biocellGame.Run();

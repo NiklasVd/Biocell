@@ -11,6 +11,8 @@ namespace Biocell.Game
 {
     public class TextureController : IController
     {
+        public const string textureResourceHeader = "textures";
+
         private readonly Dictionary<string, Texture2D> textures;
         private readonly ContentManager contentManager;
 
@@ -30,21 +32,13 @@ namespace Biocell.Game
             var texture = contentManager.Load<Texture2D>(path);
             textures.Add(path, texture);
         }
-        public void RegisterTexturesByResourceFile(string filePath)
+        public void RegisterTexturesByResourceCode(string[] textLines)
         {
-            if (File.Exists(filePath))
+            foreach (var textLine in textLines)
             {
-                var textLines = File.ReadAllLines(filePath).AsEnumerable();
-                Parallel.ForEach(textLines, (t) =>
-                {
-                    if (File.Exists(t))
-                    {
-                        RegisterTexture(t);
-                    }
-                });
+                RegisterTexture(textLine);
+                Debug.Log("Resource: " + textLine);
             }
-
-            textures.All(k => { Debug.Log(k.Value.Name); return true; });
         }
         public void UnregisterTexture(string path)
         {
@@ -53,12 +47,8 @@ namespace Biocell.Game
 
         public void UnregisterAll()
         {
-            // Really do this parallel?
-            var texturesCollection = textures.AsEnumerable();
-            Parallel.ForEach(texturesCollection, (t) =>
-            {
-                UnregisterTexture(t.Key);
-            });
+            foreach(var textureKey in textures.Keys)
+                UnregisterTexture(textureKey);
         }
 
         private void ProcessResourceFile(string filePath)

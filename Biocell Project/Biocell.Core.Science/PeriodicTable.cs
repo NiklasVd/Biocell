@@ -46,11 +46,11 @@ namespace Biocell.Core.Science
                 switch (moleculeTypes[i])
                 {
                     case MoleculeType.CoOH:
-                        molecule.BindChain(Get(ElementType.Co), Get(ElementType.O), Get(ElementType.H));
+                        molecule.Bind(Get(ElementType.Co), Get(ElementType.O), Get(ElementType.H));
                         break;
 
                     case MoleculeType.NH2:
-                        molecule.BindChain(Get(ElementType.N), Get(ElementType.H) * 2);
+                        molecule.Bind(Get(ElementType.N), Get(ElementType.H), Get(ElementType.H)); // Find a better for the double H add?
                         break;
                 }
 

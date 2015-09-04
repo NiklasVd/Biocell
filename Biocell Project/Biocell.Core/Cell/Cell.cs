@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Xna.Framework;
 
 namespace Biocell.Core
 {
@@ -10,6 +11,9 @@ namespace Biocell.Core
     {
         // TODO: Implement ID?
         private List<CellComponent> embeddedCellComponents;
+
+        private bool isSplitting;
+        public bool IsSplitting { get { return isSplitting; } }
 
         protected Cell()
         {
@@ -30,6 +34,11 @@ namespace Biocell.Core
             {
                 cellComponent.Remove();
             }
+        }
+
+        public virtual void Split()
+        {
+            isSplitting = true;
         }
     }
 }

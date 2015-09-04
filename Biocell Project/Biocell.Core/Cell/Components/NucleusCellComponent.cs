@@ -9,14 +9,11 @@ namespace Biocell.Core
 {
     public class NucleusCellComponent : CellComponent
     {
-        // TODO: Implement DNA
-        private readonly List<Molecule> fullDna;
+        private readonly List<Molecule> dna; // Make this a bit more detailed? Chromosomes and stuff...
 
-        public NucleusCellComponent()
+        public NucleusCellComponent(List<Molecule> dna)
         {
-            fullDna = new List<Molecule>();
+            this.dna = dna;
         }
-
-
     }
 }

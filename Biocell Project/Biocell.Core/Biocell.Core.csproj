@@ -58,13 +58,13 @@
     <Compile Include="Transform.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Biocell.Core.Atom\Biocell.Core.Science.csproj">
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Biocell.Core.Science\Biocell.Core.Science.csproj">
       <Project>{49c7b1c2-ec3a-4b8a-be5b-b2e39eb97721}</Project>
       <Name>Biocell.Core.Science</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -60,10 +60,6 @@
     <Compile Include="Controllers\TextureController.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Biocell.Core.Atom\Biocell.Core.Science.csproj">
-      <Project>{49c7b1c2-ec3a-4b8a-be5b-b2e39eb97721}</Project>
-      <Name>Biocell.Core.Science</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Biocell.Core\Biocell.Core.csproj">
       <Project>{faed9bd9-5523-431d-b80c-5efa0e32687c}</Project>
       <Name>Biocell.Core</Name>

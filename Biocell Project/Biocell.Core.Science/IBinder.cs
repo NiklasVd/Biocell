@@ -9,7 +9,7 @@ namespace Biocell.Core.Science
     public interface IBinder<T>
     {
         T Bind(IBindable to);
-        T BindChain(params IBindable[] toChain);
+        T Bind(params IBindable[] toChain);
         T BindRange(IBindable[] toRange);
 
         T Release(IBindable of);

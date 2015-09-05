@@ -10,7 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Biocell.Game
+namespace Biocell.Core
 {
     public class GameCore
     {

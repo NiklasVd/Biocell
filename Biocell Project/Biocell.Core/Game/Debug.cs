@@ -6,7 +6,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Biocell.Game
+namespace Biocell.Core
 {
     public static class Debug
     {

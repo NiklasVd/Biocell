@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Biocell.Core
 {
-    public class Transform
+    public sealed class Transform : EntityComponent
     {
         public Vector2 position, scale, origin;
         public float rotation;
@@ -23,7 +23,7 @@ namespace Biocell.Core
         {
         }
 
-        public void Update(GameTime gameTime)
+        internal override void Update(GameTime gameTime)
         {
 
         }

@@ -1,4 +1,4 @@
-﻿using Biocell.Game;
+﻿using Biocell.Core;
 using System;
 using System.Collections.Generic;
 using System.Linq;

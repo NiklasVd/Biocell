@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Biocell.Core
 {
-    public class Renderer
+    public sealed class Renderer : EntityComponent
     {
         public Texture2D texture;
         public float layerDepth;
@@ -20,7 +20,7 @@ namespace Biocell.Core
             this.usedTransform = usedTransform;
         }
 
-        public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
+        internal override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
             if (texture != null)
             {

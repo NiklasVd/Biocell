@@ -12,14 +12,16 @@ namespace Biocell.Core
     {
         public readonly Transform transform;
         public readonly Renderer renderer;
+        public readonly Animator animator;
 
-        public bool update;
+        internal bool update;
         // TODO: Implement ID
 
         public Entity()
         {
             transform = new Transform();
             renderer = new Renderer(transform);
+            animator = new Animator(this);
         }
 
         public virtual void Update(GameTime gameTime)

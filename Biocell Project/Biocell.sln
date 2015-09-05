@@ -5,8 +5,6 @@ VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Biocell.Core", "Biocell.Core\Biocell.Core.csproj", "{FAED9BD9-5523-431D-B80C-5EFA0E32687C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Biocell.Game", "Biocell.Game\Biocell.Game.csproj", "{7F499776-2BAD-41EB-B13C-F31073615ED0}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BiocellApp", "BiocellApp\BiocellApp.csproj", "{55A7DEAD-8FC3-4037-B0E2-7EAAF499CB3D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Biocell.Core.Science", "Biocell.Core.Science\Biocell.Core.Science.csproj", "{49C7B1C2-EC3A-4B8A-BE5B-B2E39EB97721}"
@@ -21,10 +19,6 @@ Global
 		{FAED9BD9-5523-431D-B80C-5EFA0E32687C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FAED9BD9-5523-431D-B80C-5EFA0E32687C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FAED9BD9-5523-431D-B80C-5EFA0E32687C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{7F499776-2BAD-41EB-B13C-F31073615ED0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7F499776-2BAD-41EB-B13C-F31073615ED0}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7F499776-2BAD-41EB-B13C-F31073615ED0}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7F499776-2BAD-41EB-B13C-F31073615ED0}.Release|Any CPU.Build.0 = Release|Any CPU
 		{55A7DEAD-8FC3-4037-B0E2-7EAAF499CB3D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{55A7DEAD-8FC3-4037-B0E2-7EAAF499CB3D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{55A7DEAD-8FC3-4037-B0E2-7EAAF499CB3D}.Release|Any CPU.ActiveCfg = Release|Any CPU

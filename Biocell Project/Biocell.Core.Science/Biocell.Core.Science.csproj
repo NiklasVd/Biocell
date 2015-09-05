@@ -49,6 +49,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Atom.cs" />
+    <Compile Include="Cell\Cell.cs" />
+    <Compile Include="Cell\CellComponent.cs" />
+    <Compile Include="Cell\Components\NucleusCellComponent.cs" />
+    <Compile Include="Cell\Eukaryote\EukaryoteCell.cs" />
     <Compile Include="IBindable.cs" />
     <Compile Include="IBinder.cs" />
     <Compile Include="Molecule.cs" />
@@ -58,7 +62,12 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\Biocell.Core\Biocell.Core.csproj">
+      <Project>{faed9bd9-5523-431d-b80c-5efa0e32687c}</Project>
+      <Name>Biocell.Core</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

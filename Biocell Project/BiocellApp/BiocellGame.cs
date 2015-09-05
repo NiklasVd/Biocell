@@ -1,6 +1,5 @@
 ﻿using Biocell.Core;
 using Biocell.Core.Science;
-using Biocell.Game;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
@@ -29,6 +28,15 @@ namespace BiocellApp
             gameCore = new GameCore();
 
             var testCell = new EukaryoteCell();
+            testCell.transform.position = new Vector2(10, 10);
+            testCell.renderer.texture = gameCore.Textures[@"Textures\Cell1"];
+
+            testCell.animator.Add(AnimationComposer.New("Idle")
+                .Move(new Vector2(-1, 1))
+                .Wait(1)
+                .Move(new Vector2(1, -1)));
+
+            
             gameCore.Scene.AddEntity(testCell);
 
             base.Initialize();

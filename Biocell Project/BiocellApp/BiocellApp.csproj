@@ -90,10 +90,6 @@
       <Project>{faed9bd9-5523-431d-b80c-5efa0e32687c}</Project>
       <Name>Biocell.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Biocell.Game\Biocell.Game.csproj">
-      <Project>{7f499776-2bad-41eb-b13c-f31073615ed0}</Project>
-      <Name>Biocell.Game</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Content\Content Resources.txt">

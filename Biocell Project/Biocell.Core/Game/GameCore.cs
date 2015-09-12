@@ -15,7 +15,8 @@ namespace Biocell.Core
     public class GameCore
     {
         public const string sceneSavePath = @"Scenes\", sceneFileExtension = ".bcscene",
-            resourceComment = "#";
+            resourceCommentOperator = "#",
+            resourceHeaderOperator = ":";
         public static string Version { get { return "1.00"; } }
 
         private TextureController textures;
@@ -44,16 +45,47 @@ namespace Biocell.Core
 
         public void LoadContent(ContentManager contentManager, string resourceFilePath)
         {
+            /*
+            #This is a comment
+
+            textures:
+            Textures\Cell1
+            */
+
             if (File.Exists(resourceFilePath))
             {
                 var textLines = File.ReadAllLines(resourceFilePath).ToList();
-                textLines.ForEach(t => t.Trim());
-                textLines.RemoveAll(t => t.StartsWith(resourceComment));
+                textLines.ForEach(t => t.Trim()); // Remove spaces from the beginning or end
+
+                // Remove comments
+                for (int i = 0; i < textLines.Count; i++)
+                {
+                    var textLine = textLines[i];
+                    var commentIndex = textLine.IndexOf(resourceCommentOperator);
+                    if (commentIndex != -1)
+                    {
+                        textLines[i] = textLine.Remove(commentIndex, textLine.Length - commentIndex);
+                    }
+                }
 
                 #region Textures
-                var textureTextLines = textLines.FindAll(t => t.StartsWith(TextureController.textureResourceHeader)); // Cut the found items out of the textLines list?
+                var textureTextLines = new List<string>();
+                // Find out where the first occurance of a "textures" header is
+                var textureHeaderIndex = textLines.FindIndex(t => t == TextureController.textureResourceHeader + resourceHeaderOperator);
+                for (int i = 0; i < textLines.Count - textureHeaderIndex; i++)
+                {
+                    var textLine = textLines[textureHeaderIndex];
 
-                textures = new TextureController(contentManager);
+                    if (!textLine.Contains(resourceHeaderOperator)) // If a header operator ":" is found, stop the texture loading
+                        break;
+                    Debug.Log("Adding texture");
+                    // If the texture that is referenced exists, load it into the game
+                    if (File.Exists(textLine))
+                        textureTextLines.Add(textLine);
+                    else continue; // If the texture does not exist, just continue
+                }
+
+                textures = new TextureController(contentManager); // Create the texture manager and add all the referenced textures
                 textures.RegisterTexturesByResourceCode(textureTextLines.ToArray());
                 #endregion
             }

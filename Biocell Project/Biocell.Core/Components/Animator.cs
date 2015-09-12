@@ -17,6 +17,7 @@ namespace Biocell.Core
         internal Animator(Entity myEntity)
         {
             animations = new List<Animation>();
+            this.myEntity = myEntity;
         }
 
         public void Play(Animation animation)

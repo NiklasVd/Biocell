@@ -19,24 +19,24 @@ namespace Biocell.Core
         }
 
         public static void Log(string text,
-            [CallerMemberName] string sourceInfoMemberName = "", [CallerFilePath] string sourceInfoFilePath = "", [CallerLineNumber] int sourceInfoLineNumber = -1)
+            string sourceInfoMemberName = "", string sourceInfoFilePath = "", int sourceInfoLineNumber = -1)
         {
             LogMessage(text, LogMessageType.Normal, sourceInfoMemberName, sourceInfoFilePath, sourceInfoLineNumber);
         }
         public static void LogWarning(string text,
-            [CallerMemberName] string sourceInfoMemberName = "", [CallerFilePath] string sourceInfoFilePath = "", [CallerLineNumber] int sourceInfoLineNumber = -1)
+            string sourceInfoMemberName = "", string sourceInfoFilePath = "", int sourceInfoLineNumber = -1)
         {
             LogMessage(text, LogMessageType.Warning, sourceInfoMemberName, sourceInfoFilePath, sourceInfoLineNumber);
         }
         public static void LogError(string text,
-            [CallerMemberName] string sourceInfoMemberName = "", [CallerFilePath] string sourceInfoFilePath = "", [CallerLineNumber] int sourceInfoLineNumber = -1)
+            string sourceInfoMemberName = "", string sourceInfoFilePath = "", int sourceInfoLineNumber = -1)
         {
             LogMessage(text, LogMessageType.Error, sourceInfoMemberName, sourceInfoFilePath, sourceInfoLineNumber);
         }
         public static void LogException(Exception exception,
-            [CallerMemberName] string sourceInfoMemberName = "", [CallerFilePath] string sourceInfoFilePath = "", [CallerLineNumber] int sourceInfoLineNumber = -1)
+            string sourceInfoMemberName = "", string sourceInfoFilePath = "", int sourceInfoLineNumber = -1)
         {
-            // Do you really need the caller info for exceptions? The text already contains the information needed right?
+            // Do you really need the caller info for exceptions? The text already contains the information needed, right?
             LogMessage(exception.ToString(), LogMessageType.Exception, sourceInfoMemberName, sourceInfoFilePath, sourceInfoLineNumber);
         }
 

@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("BiocellApp")]
+[assembly: AssemblyTitle("Biocell.Network")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Case-o-Matic")]
-[assembly: AssemblyProduct("BiocellApp")]
+[assembly: AssemblyProduct("Biocell.Network")]
 [assembly: AssemblyCopyright("Copyright ©  2015")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("55a7dead-8fc3-4037-b0e2-7eaaf499cb3d")]
+[assembly: Guid("5517bcc0-fe52-4ad3-8ac6-a88d6de92089")]
 
 // Version information for an assembly consists of the following four values:
 //

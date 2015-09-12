@@ -9,7 +9,7 @@ namespace Biocell.Core
 {
     public sealed class Animation
     {
-        // TODO: Implement visibility play modifier so that if the entity is not in the view of the player camera the animation does get paused if currently playing?
+        // TODO: Implement visibility play modifier so that if the entity is not in the view of the player camera the animation gets paused if currently playing?
         public float playSpeed;
         public bool playBackwards;
         
@@ -39,6 +39,7 @@ namespace Biocell.Core
 
         public Animation(string name)
         {
+            actions = new List<AnimationAction>();
             this.name = name;
         }
 
@@ -57,6 +58,14 @@ namespace Biocell.Core
         public Animation Wait(float timestepSeconds = 1)
         {
             return Put(new AnimationAction(timestepSeconds));
+        }
+        public Animation AppendTrigger(OnAnimationActionTriggeredHandler onAnimationActionTriggered)
+        {
+            var lastAction = actions.LastOrDefault();
+            if (lastAction != default(AnimationAction))
+                lastAction.onAnimationTriggered = onAnimationActionTriggered;
+
+            return this;
         }
 
         public Animation Put(AnimationAction action)

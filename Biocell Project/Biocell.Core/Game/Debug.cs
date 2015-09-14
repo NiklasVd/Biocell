@@ -45,7 +45,7 @@ namespace Biocell.Core
             var logMessageLines = "";
             logMessages.ForEach(l => logMessageLines += l.text + "\n"); // Is that really it? No more information?
 
-            logMessageLines += "---\n";
+            logMessageLines += "\n---\n";
             File.AppendAllLines(filePath, logMessageLines.Split('\n'));
         }
 

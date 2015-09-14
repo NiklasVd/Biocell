@@ -1,5 +1,6 @@
 ﻿using Biocell.Core;
 using System;
+using System.Linq;
 
 namespace BiocellGame
 {
@@ -9,11 +10,7 @@ namespace BiocellGame
     /// </summary>
     public static class Program
     {
-        public const string version = "1.00-a",
-            debugFilePath = "debug.log";
-
         public static bool IsDevelopmentMode { get; private set; }
-        public static bool IsTelemetryActivated { get; private set; }
 
         /// <summary>
         /// The main entry point for the application.
@@ -21,40 +18,42 @@ namespace BiocellGame
         [STAThread]
         static void Main()
         {
-            Debug.Log("Biocell (Version " + version + ")");
-
-            // Command line evaluation
-            var commandLineArgs = Environment.GetCommandLineArgs();
-            foreach (var commandLineArg in commandLineArgs)
-            {
-                switch (commandLineArg)
-                {
-                    case "-devmode":
-                        IsDevelopmentMode = true;
-                        Debug.Log("Activated development mode.");
-                        break;
-
-                    case "-telemetry":
-                        IsTelemetryActivated = true;
-                        Debug.Log("Activated telemetry behaviour. The client will send anonymous usage data and statistics to the central servers.");
-                        break;
-
-                    //default:
-                    //    Debug.Log("The command line argument \"" + commandLineArg + "\" is unknown.");
-                    //    break;
-                }
-            }
+            Debug.Log("Biocell (Version " + Properties.Resources.Version + "-" + Properties.Resources.LifeCycle + ")");
+            EvaluateCommandLineArgs(Environment.GetCommandLineArgs());
 
             using (var game = new Game())
             {
-                game.Exiting += OnGameExiting;
+                game.Exiting += OnGameExit;
                 game.Run();
             }
         }
 
-        private static void OnGameExiting(object sender, EventArgs e)
+        private static void OnGameExit(object sender, EventArgs e)
         {
-            Debug.SaveLog(debugFilePath);
+            Debug.SaveLog(Settings.BiocellGameSettings.Default.LogFile);
+        }
+
+        private static void EvaluateCommandLineArgs(string[] args)
+        {
+            var executionPath = args[0];
+
+            var argsList = args.ToList();
+            argsList.RemoveAt(0); // Without the execution path item
+
+            foreach (var arg in argsList)
+            {
+                switch (arg)
+                {
+                    case "-devmode":
+                        IsDevelopmentMode = true;
+                        Debug.Log("The development mode got activated.");
+                        break;
+
+                    default:
+                        Debug.Log("The command line argument \"" + arg + "\" is unknown.");
+                        break;
+                }
+            }
         }
     }
 #endif

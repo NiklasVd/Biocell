@@ -14,7 +14,7 @@ namespace Biocell.Core
         public readonly Renderer renderer;
         public readonly Animator animator;
 
-        internal bool update;
+        internal bool dontUpdate;
         // TODO: Implement ID
 
         public Entity()

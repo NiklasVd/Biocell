@@ -36,9 +36,22 @@ namespace Biocell.Core
             }
         }
 
-        public virtual void Split()
+        public void Split()
         {
             isSplitting = true;
+        }
+        public void PerformApoptosis()
+        {
+
+        }
+
+        protected virtual void OnSplit()
+        {
+
+        }
+        protected virtual void OnPerformApoptosis()
+        {
+
         }
     }
 }

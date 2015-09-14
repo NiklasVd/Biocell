@@ -40,16 +40,6 @@ namespace Biocell.Core
                 Debug.Log("Resource: " + textLine);
             }
         }
-        public void UnregisterTexture(string path)
-        {
-            textures.Remove(path);
-        }
-
-        public void UnregisterAll()
-        {
-            foreach(var textureKey in textures.Keys)
-                UnregisterTexture(textureKey);
-        }
 
         private void ProcessResourceFile(string filePath)
         {

@@ -11,27 +11,25 @@ namespace Biocell.Core
     {
         public readonly NucleusCellComponent nucleus;
 
-        private EukaryoteCellMitosePhase mitosePhase;
-        public EukaryoteCellMitosePhase MitosePhase
-        {
-            get { return mitosePhase; }
-        }
-
         public EukaryoteCell()
         {
             ImplementCellComponent(new NucleusCellComponent(new List<Molecule>()));
-            mitosePhase = EukaryoteCellMitosePhase.None;
         }
 
-        public override void Split()
+        protected override void OnSplit()
         {
-            base.Split();
+            base.OnSplit();
+        }
+
+        protected override void OnPerformApoptosis()
+        {
+            base.OnPerformApoptosis();
         }
     }
 
-    public enum EukaryoteCellMitosePhase
-    {
-        None
-        // TODO: Implement phases
-    }
+    //public enum EukaryoteCellMitosePhase
+    //{
+    //    None
+    //    // TODO: Implement phases
+    //}
 }

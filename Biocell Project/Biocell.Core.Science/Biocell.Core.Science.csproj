@@ -45,15 +45,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Atom.cs" />
+    <Compile Include="Base\Atom.cs" />
     <Compile Include="Cell\Cell.cs" />
     <Compile Include="Cell\CellComponent.cs" />
     <Compile Include="Cell\Components\NucleusCellComponent.cs" />
     <Compile Include="Cell\Eukaryote\EukaryoteCell.cs" />
-    <Compile Include="IBindable.cs" />
-    <Compile Include="IBinder.cs" />
-    <Compile Include="Molecule.cs" />
-    <Compile Include="PeriodicTable.cs" />
+    <Compile Include="Base\IBindable.cs" />
+    <Compile Include="Base\IBinder.cs" />
+    <Compile Include="Base\Molecule.cs" />
+    <Compile Include="Base\PeriodicTable.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

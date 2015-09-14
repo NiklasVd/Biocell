@@ -10,7 +10,7 @@ namespace BiocellGame
     /// </summary>
     public class Game : Microsoft.Xna.Framework.Game
     {
-        public GameCore gameCore;
+        private GameCore gameCore;
 
         private GraphicsDeviceManager graphics;
         private SpriteBatch spriteBatch;
@@ -43,9 +43,20 @@ namespace BiocellGame
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            //gameCore.LoadContent(Content, @"Content\Resource Keys.txt");
 
-            var texture = Content.Load<Texture2D>(@"Textures\Cell1");
+            gameCore.LoadContent(Content);
+
+            // Test
+            cell = new EukaryoteCell();
+            cell.transform.position = new Vector2(300, 200);
+            cell.renderer.texture = gameCore.Textures[@"Textures\Cell1"];
+
+            cell.animator.Add(new Animation("Idle")
+                .Move(new Vector2(0, 10), 2)
+                .Move(new Vector2(0, -20), 2));
+
+            gameCore.Scene.AddEntity(cell);
+            cell.animator.Play("Idle");
         }
 
         /// <summary>
@@ -57,7 +68,6 @@ namespace BiocellGame
             gameCore.UnloadContent();
         }
 
-        bool once;
         /// <summary>
         /// Allows the game to run logic such as updating the world,
         /// checking for collisions, gathering input, and playing audio.
@@ -66,22 +76,6 @@ namespace BiocellGame
         protected override void Update(GameTime gameTime)
         {
             gameCore.Update(gameTime);
-            if (Keyboard.GetState().IsKeyDown(Keys.Space) && !once)
-            {
-                once = true;
-
-                cell = new EukaryoteCell();
-                cell.transform.position = new Vector2(30, 30);
-                cell.renderer.texture = gameCore.Textures[@"Textures\Cell1"];
-
-                cell.animator.Add(new Animation("Idle")
-                    .Move(new Vector2(0, 5), 2)
-                    .Move(new Vector2(0, -10), 2));
-
-                gameCore.Scene.AddEntity(cell);
-                cell.animator.Play("Idle");
-            }
-
             base.Update(gameTime);
         }
 
@@ -94,6 +88,8 @@ namespace BiocellGame
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             gameCore.Draw(gameTime, spriteBatch);
+            spriteBatch.End(); // The end is set manually, so you can draw things without using the game core
+
             base.Draw(gameTime);
         }
     }

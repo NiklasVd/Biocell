@@ -5,6 +5,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -14,9 +15,7 @@ namespace Biocell.Core
 {
     public class GameCore
     {
-        public const string sceneSavePath = @"Scenes\", sceneFileExtension = ".bcscene",
-            resourceCommentOperator = "#",
-            resourceHeaderOperator = ":";
+        public const string sceneSavePath = @"Scenes\", sceneFileExtension = ".bcscene";
         public static string Version { get { return "1.00"; } }
 
         private TextureController textures;
@@ -43,68 +42,30 @@ namespace Biocell.Core
             scene = newScene;
         }
 
-        public void LoadContent(ContentManager contentManager, string resourceFilePath)
+        public void LoadContent(ContentManager contentManager)
         {
-            /*
-            #This is a comment
+            textures = new TextureController(contentManager);
 
-            textures:
-            Textures\Cell1
-            */
-
-            if (File.Exists(resourceFilePath))
-            {
-                var textLines = File.ReadAllLines(resourceFilePath).ToList();
-                textLines.ForEach(t => t.Trim()); // Remove spaces from the beginning or end
-
-                // Remove comments
-                for (int i = 0; i < textLines.Count; i++)
-                {
-                    var textLine = textLines[i];
-                    var commentIndex = textLine.IndexOf(resourceCommentOperator);
-                    if (commentIndex != -1)
-                    {
-                        textLines[i] = textLine.Remove(commentIndex, textLine.Length - commentIndex);
-                    }
-                }
-
-                #region Textures
-                var textureTextLines = new List<string>();
-                // Find out where the first occurance of a "textures" header is
-                var textureHeaderIndex = textLines.FindIndex(t => t == TextureController.textureResourceHeader + resourceHeaderOperator);
-                for (int i = 0; i < textLines.Count - textureHeaderIndex; i++)
-                {
-                    var textLine = textLines[textureHeaderIndex];
-
-                    if (!textLine.Contains(resourceHeaderOperator)) // If a header operator ":" is found, stop the texture loading
-                        break;
-                    Debug.Log("Adding texture");
-                    // If the texture that is referenced exists, load it into the game
-                    if (File.Exists(textLine))
-                        textureTextLines.Add(textLine);
-                    else continue; // If the texture does not exist, just continue
-                }
-
-                textures = new TextureController(contentManager); // Create the texture manager and add all the referenced textures
-                textures.RegisterTexturesByResourceCode(textureTextLines.ToArray());
-                #endregion
-            }
+            #region Cells
+            textures.RegisterTexture(@"Textures\Cell1");
+            #endregion
         }
         public void UnloadContent()
         {
-            if (textures != null)
-                textures.UnregisterAll();
         }
         public void Update(GameTime gameTime)
         {
             var updateEntities = scene.entities.ToArray();
             for (int i = 0; i < updateEntities.Length; i++)
             {
-                updateEntities[i].Update(gameTime);
+                if (!updateEntities[i].dontUpdate)
+                    updateEntities[i].Update(gameTime);
             }
         }
         public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
+            spriteBatch.Begin(); // TODO: Set specific settings here
+
             var drawEntities = scene.entities.ToArray();
             for (int i = 0; i < drawEntities.Length; i++)
             {
@@ -112,10 +73,9 @@ namespace Biocell.Core
             }
         }
 
-        private void UnloadResources()
+        private void PerformEntityOptimizations()
         {
-            if (textures != null)
-                textures.UnregisterAll();
+
         }
 
         public static void Save(GameScene scene)
@@ -167,3 +127,49 @@ namespace Biocell.Core
         }
     }
 }
+
+/* RESOURCE FILE SYSTEM (OLD)
+
+            #This is a comment
+
+            textures:
+            Textures\Cell1
+
+            if (File.Exists(resourceFilePath))
+            {
+                var textLines = File.ReadAllLines(resourceFilePath).ToList();
+textLines.ForEach(t => t.Trim()); // Remove spaces from the beginning or end
+
+                // Remove comments
+                for (int i = 0; i<textLines.Count; i++)
+                {
+                    var textLine = textLines[i];
+var commentIndex = textLine.IndexOf(resourceCommentOperator);
+                    if (commentIndex != -1)
+                    {
+                        textLines[i] = textLine.Remove(commentIndex, textLine.Length - commentIndex);
+                    }
+                }
+
+                #region Textures
+                var textureTextLines = new List<string>();
+// Find out where the first occurance of a "textures" header is
+var textureHeaderIndex = textLines.FindIndex(t => t == TextureController.textureResourceHeader + resourceHeaderOperator);
+                for (int i = 0; i<textLines.Count - textureHeaderIndex; i++)
+                {
+                    var textLine = textLines[textureHeaderIndex];
+
+                    if (!textLine.Contains(resourceHeaderOperator)) // If a header operator ":" is found, stop the texture loading
+                        break;
+                    Debug.Log("Adding texture");
+                    // If the texture that is referenced exists, load it into the game
+                    if (File.Exists(textLine))
+                        textureTextLines.Add(textLine);
+                    else continue; // If the texture does not exist, just continue
+                }
+
+                textures = new TextureController(contentManager); // Create the texture manager and add all the referenced textures
+textures.RegisterTexturesByResourceCode(textureTextLines.ToArray());
+                #endregion
+            }
+*/

@@ -1,0 +1,5 @@
+﻿# All resources are referenced here
+# Loaded when Game.LoadContent is called
+
+textures:
+Textures\Cell1

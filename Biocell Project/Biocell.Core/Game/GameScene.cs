@@ -27,7 +27,7 @@ namespace Biocell.Core
             if (!entities.Contains(entity))
             {
                 entities.Add(entity);
-                if (entities.Count % entityCountForSort == 0)
+                if (entities.Count % entityCountForSort == entityCountForSort)
                     SortEntities();
             }
         }
@@ -38,7 +38,7 @@ namespace Biocell.Core
 
         private void SortEntities()
         {
-            entities.OrderBy(e => e.update);
+            entities.OrderBy(e => e.dontUpdate);
         }
     }
 }

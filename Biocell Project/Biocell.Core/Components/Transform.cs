@@ -21,6 +21,7 @@ namespace Biocell.Core
 
         public Transform()
         {
+            scale = Vector2.One;
         }
 
         internal override void Update(GameTime gameTime)

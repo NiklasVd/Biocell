@@ -48,7 +48,7 @@ namespace BiocellGame
 
             // Test
             cell = new EukaryoteCell();
-            cell.transform.position = new Vector2(300, 200);
+            cell.transform.position = new Vector2(10, 10);
             cell.renderer.texture = gameCore.Textures[@"Textures\Cell1"];
 
             cell.animator.Add(new Animation("Idle")
